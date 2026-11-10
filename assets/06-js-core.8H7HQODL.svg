@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif">
+  <rect width="1200" height="800" fill="#FDF6EC"/>
+  <rect x="14" y="14" width="1172" height="772" rx="26" fill="none" stroke="#2D2A32" stroke-width="4"/>
+
+  <!-- 标题 -->
+  <rect x="60" y="40" width="640" height="70" rx="16" fill="#2D2A32"/>
+  <text x="86" y="72" font-size="28" font-weight="bold" fill="#FFD93D">第六幕 · 看不见的管家们</text>
+  <text x="86" y="98" font-size="17" fill="#FFFFFF">InitializeCore / Pressability / Animated / VirtualizedList</text>
+
+  <!-- 管家1：InitializeCore -->
+  <g transform="translate(60,150)">
+    <rect x="0" y="0" width="520" height="280" rx="18" fill="#61DAFB" stroke="#2D2A32" stroke-width="4"/>
+    <!-- 管家形象 -->
+    <g transform="translate(60,60)">
+      <circle cx="60" cy="34" r="30" fill="#FFF9EC" stroke="#2D2A32" stroke-width="3.5"/>
+      <path d="M 30 26 Q 60 6 90 26" fill="none" stroke="#2D2A32" stroke-width="3.5"/>
+      <circle cx="50" cy="34" r="3" fill="#2D2A32"/><circle cx="70" cy="34" r="3" fill="#2D2A32"/>
+      <path d="M 52 46 Q 60 51 68 46" stroke="#2D2A32" stroke-width="2.5" fill="none"/>
+      <path d="M 28 130 L 30 78 Q 60 66 90 78 L 92 130 Z" fill="#2D2A32"/>
+      <path d="M 46 76 L 60 84 L 74 76 L 60 70 Z" fill="#FF6B9D" stroke="#2D2A32" stroke-width="2"/>
+      <circle cx="48" cy="96" r="2.5" fill="#FFFFFF"/><circle cx="72" cy="96" r="2.5" fill="#FFFFFF"/>
+    </g>
+    <text x="230" y="46" font-size="21" font-weight="bold" fill="#2D2A32">开机管家 · InitializeCore</text>
+    <text x="230" y="76" font-size="14" fill="#2D2A32">App 启动第一步：把 JS 世界收拾好——</text>
+    <text x="230" y="98" font-size="14" fill="#2D2A32">polyfill、错误处理、性能标记全就位</text>
+    <text x="230" y="120" font-size="14" fill="#2D2A32">本体已瘦身成壳，真正干活在 setup-env</text>
+    <rect x="200" y="146" width="290" height="34" rx="8" fill="#FFF9EC" stroke="#2D2A32" stroke-width="2"/>
+    <text x="345" y="168" font-size="12.5" text-anchor="middle" fill="#2D2A32">InitializeCore.js:L13-37 → setup-env.js:L14-22</text>
+    <text x="230" y="216" font-size="13" fill="#2D2A32">台词："启动慢的锅别甩我，我只是个传令官。"</text>
+  </g>
+
+  <!-- 管家2：Pressability -->
+  <g transform="translate(620,150)">
+    <rect x="0" y="0" width="520" height="280" rx="18" fill="#FFD93D" stroke="#2D2A32" stroke-width="4"/>
+    <g transform="translate(60,60)">
+      <circle cx="60" cy="34" r="30" fill="#FFF9EC" stroke="#2D2A32" stroke-width="3.5"/>
+      <path d="M 30 24 Q 60 8 90 24" fill="none" stroke="#2D2A32" stroke-width="3.5"/>
+      <circle cx="50" cy="34" r="3" fill="#2D2A32"/><circle cx="70" cy="34" r="3" fill="#2D2A32"/>
+      <path d="M 50 47 Q 60 43 70 47" stroke="#2D2A32" stroke-width="2.5" fill="none"/>
+      <path d="M 28 130 L 30 78 Q 60 66 90 78 L 92 130 Z" fill="#2D2A32"/>
+      <path d="M 46 76 L 60 84 L 74 76 L 60 70 Z" fill="#6BCB77" stroke="#2D2A32" stroke-width="2"/>
+      <!-- 手指按下 -->
+      <circle cx="18" cy="112" r="9" fill="#FF6B9D" stroke="#2D2A32" stroke-width="2.5"/>
+    </g>
+    <text x="230" y="46" font-size="21" font-weight="bold" fill="#2D2A32">触控管家 · Pressability</text>
+    <text x="230" y="76" font-size="14" fill="#2D2A32">你写的 onPress 只是台词，</text>
+    <text x="230" y="98" font-size="14" fill="#2D2A32">背后是一台"按下→移动→松开"状态机：</text>
+    <text x="230" y="120" font-size="14" fill="#2D2A32">responderGrant / Release / onClick 分流</text>
+    <rect x="200" y="146" width="290" height="34" rx="8" fill="#FFF9EC" stroke="#2D2A32" stroke-width="2"/>
+    <text x="345" y="168" font-size="12.5" text-anchor="middle" fill="#2D2A32">Pressability.js:L447-549 · 状态机 L663-698</text>
+    <text x="230" y="216" font-size="13" fill="#2D2A32">台词："长按、滑动取消、双击误触，我都替你挡了。"</text>
+  </g>
+
+  <!-- 管家3：Animated -->
+  <g transform="translate(60,460)">
+    <rect x="0" y="0" width="520" height="280" rx="18" fill="#6BCB77" stroke="#2D2A32" stroke-width="4"/>
+    <g transform="translate(60,60)">
+      <circle cx="60" cy="34" r="30" fill="#FFF9EC" stroke="#2D2A32" stroke-width="3.5"/>
+      <path d="M 30 28 Q 60 4 90 28" fill="none" stroke="#2D2A32" stroke-width="3.5"/>
+      <circle cx="50" cy="34" r="3" fill="#2D2A32"/><circle cx="70" cy="34" r="3" fill="#2D2A32"/>
+      <path d="M 52 46 Q 60 52 68 46" stroke="#2D2A32" stroke-width="2.5" fill="none"/>
+      <path d="M 28 130 L 30 78 Q 60 66 90 78 L 92 130 Z" fill="#2D2A32"/>
+      <path d="M 46 76 L 60 84 L 74 76 L 60 70 Z" fill="#9B5DE5" stroke="#2D2A32" stroke-width="2"/>
+      <!-- 速度线 -->
+      <path d="M 4 60 L -14 60" stroke="#2D2A32" stroke-width="3"/>
+      <path d="M 4 78 L -20 78" stroke="#2D2A32" stroke-width="3"/>
+      <path d="M 4 96 L -14 96" stroke="#2D2A32" stroke-width="3"/>
+    </g>
+    <text x="230" y="46" font-size="21" font-weight="bold" fill="#2D2A32">动画管家 · Animated</text>
+    <text x="230" y="76" font-size="14" fill="#2D2A32">开局先问一句 useNativeDriver 吗？</text>
+    <text x="230" y="98" font-size="14" fill="#2D2A32">true：整段动画打包交给原生跑（不掉帧）</text>
+    <text x="230" y="120" font-size="14" fill="#2D2A32">false：JS 每帧驱动，跨桥费流量</text>
+    <rect x="200" y="146" width="290" height="34" rx="8" fill="#FFF9EC" stroke="#2D2A32" stroke-width="2"/>
+    <text x="345" y="168" font-size="12.5" text-anchor="middle" fill="#2D2A32">Animation.js:L54-58 · NativeAnimatedHelper.js:L89-164</text>
+    <text x="230" y="216" font-size="13" fill="#2D2A32">台词："singleOp 批量队列在手，操作指令打包发车。"</text>
+  </g>
+
+  <!-- 管家4：VirtualizedList -->
+  <g transform="translate(620,460)">
+    <rect x="0" y="0" width="520" height="280" rx="18" fill="#9B5DE5" stroke="#2D2A32" stroke-width="4"/>
+    <g transform="translate(60,60)">
+      <circle cx="60" cy="34" r="30" fill="#FFF9EC" stroke="#2D2A32" stroke-width="3.5"/>
+      <path d="M 30 26 Q 60 10 90 26" fill="none" stroke="#2D2A32" stroke-width="3.5"/>
+      <circle cx="50" cy="34" r="3" fill="#2D2A32"/><circle cx="70" cy="34" r="3" fill="#2D2A32"/>
+      <path d="M 52 46 Q 60 51 68 46" stroke="#2D2A32" stroke-width="2.5" fill="none"/>
+      <path d="M 28 130 L 30 78 Q 60 66 90 78 L 92 130 Z" fill="#2D2A32"/>
+      <path d="M 46 76 L 60 84 L 74 76 L 60 70 Z" fill="#FF9F45" stroke="#2D2A32" stroke-width="2"/>
+      <!-- 手里的清单 -->
+      <rect x="92" y="92" width="52" height="38" rx="5" fill="#FFF9EC" stroke="#2D2A32" stroke-width="2.5"/>
+      <line x1="99" y1="102" x2="136" y2="102" stroke="#2D2A32" stroke-width="2"/>
+      <line x1="99" y1="111" x2="130" y2="111" stroke="#2D2A32" stroke-width="2"/>
+      <line x1="99" y1="120" x2="136" y2="120" stroke="#2D2A32" stroke-width="2"/>
+    </g>
+    <text x="230" y="46" font-size="21" font-weight="bold" fill="#FFFFFF">列表管家 · VirtualizedList</text>
+    <text x="230" y="76" font-size="14" fill="#FFFFFF">万条数据也只渲染"视口附近"的几十条，</text>
+    <text x="230" y="98" font-size="14" fill="#FFFFFF">滚动逼近时才补货，远离就回收——</text>
+    <text x="230" y="120" font-size="14" fill="#FFFFFF">getItemLayout 让它免测量直飞目标行</text>
+    <rect x="200" y="146" width="290" height="34" rx="8" fill="#FFF9EC" stroke="#2D2A32" stroke-width="2"/>
+    <text x="345" y="168" font-size="12.5" text-anchor="middle" fill="#2D2A32">VirtualizedList.js:L13-20（再导出）· FlatList.js:L83-95</text>
+    <text x="230" y="216" font-size="13" fill="#FFFFFF">台词："内存？我省得很。"</text>
+  </g>
+
+  <!-- 底注 -->
+  <text x="600" y="762" font-size="15" text-anchor="middle" fill="#2D2A32">一句话：它们不常露脸，但每一次"丝滑"背后都有一位管家在值班</text>
+</svg>

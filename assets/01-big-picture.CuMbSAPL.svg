@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif">
+  <rect width="1200" height="800" fill="#EAF6FF"/>
+  <rect x="14" y="14" width="1172" height="772" rx="26" fill="none" stroke="#2D2A32" stroke-width="4"/>
+
+  <!-- 标题 -->
+  <rect x="60" y="40" width="620" height="70" rx="16" fill="#2D2A32"/>
+  <text x="86" y="72" font-size="28" font-weight="bold" fill="#61DAFB">第一幕 · 三层世界</text>
+  <text x="86" y="98" font-size="17" fill="#FFFFFF">JS 写代码，C++ 当枢纽，原生干活</text>
+
+  <!-- ===== 上层：JS 大楼 ===== -->
+  <g transform="translate(70,150)">
+    <rect x="0" y="0" width="1060" height="190" rx="18" fill="#61DAFB" stroke="#2D2A32" stroke-width="4" opacity="0.95"/>
+    <text x="26" y="40" font-size="24" font-weight="bold" fill="#2D2A32">JS 世界（云层 · 你的代码住这）</text>
+    <!-- 三栋楼 -->
+    <g transform="translate(60,62)" stroke="#2D2A32" stroke-width="3">
+      <rect x="0" y="0" width="150" height="86" fill="#FFFFFF"/>
+      <text x="75" y="30" font-size="15" font-weight="bold" text-anchor="middle" stroke="none" fill="#2D2A32">Libraries/</text>
+      <text x="75" y="52" font-size="13" text-anchor="middle" stroke="none" fill="#2D2A32">组件 · 动画 · 列表</text>
+      <text x="75" y="70" font-size="13" text-anchor="middle" stroke="none" fill="#2D2A32">40+ 个子目录</text>
+    </g>
+    <g transform="translate(250,62)" stroke="#2D2A32" stroke-width="3">
+      <rect x="0" y="0" width="150" height="86" fill="#FFFFFF"/>
+      <text x="75" y="30" font-size="15" font-weight="bold" text-anchor="middle" stroke="none" fill="#2D2A32">Renderer/shims</text>
+      <text x="75" y="52" font-size="13" text-anchor="middle" stroke="none" fill="#2D2A32">ReactFabric 渲染入口</text>
+      <text x="75" y="70" font-size="13" text-anchor="middle" stroke="none" fill="#2D2A32">ViewConfig 注册表</text>
+    </g>
+    <g transform="translate(440,62)" stroke="#2D2A32" stroke-width="3">
+      <rect x="0" y="0" width="170" height="86" fill="#FFFFFF"/>
+      <text x="85" y="30" font-size="15" font-weight="bold" text-anchor="middle" stroke="none" fill="#2D2A32">index.js（懒大门）</text>
+      <text x="85" y="52" font-size="13" text-anchor="middle" stroke="none" fill="#2D2A32">所有 API 都是 getter</text>
+      <text x="85" y="70" font-size="13" text-anchor="middle" stroke="none" fill="#2D2A32">用到才 require</text>
+    </g>
+    <!-- 对话气泡 -->
+    <g transform="translate(680,52)">
+      <rect x="0" y="0" width="330" height="100" rx="14" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+      <path d="M 20 100 L 6 122 L 52 100 Z" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+      <text x="18" y="30" font-size="15" fill="#2D2A32">"我负责声明界面：一只 &lt;View&gt;，</text>
+      <text x="18" y="54" font-size="15" fill="#2D2A32">一根 &lt;Text&gt;，全是愿望清单。</text>
+      <text x="18" y="78" font-size="15" fill="#2D2A32">真正动手盖房子的不是我。"</text>
+    </g>
+  </g>
+
+  <!-- 电梯井：JSI -->
+  <g transform="translate(430,340)">
+    <rect x="0" y="0" width="340" height="86" rx="14" fill="#FFD93D" stroke="#2D2A32" stroke-width="4"/>
+    <text x="170" y="34" font-size="20" font-weight="bold" text-anchor="middle" fill="#2D2A32">JSI 电梯（C++ 修的）</text>
+    <text x="170" y="62" font-size="15" text-anchor="middle" fill="#2D2A32">JS 与 C++ 直接对话，无中间商</text>
+    <!-- 告示牌：旧桥已拆 -->
+    <g transform="translate(-190,4)">
+      <rect x="0" y="0" width="160" height="78" rx="10" fill="#FF6B9D" stroke="#2D2A32" stroke-width="3" transform="rotate(-6)"/>
+      <text x="80" y="30" font-size="15" font-weight="bold" text-anchor="middle" fill="#FFFFFF" transform="rotate(-6 80 39)">旧 Bridge 快递站</text>
+      <text x="80" y="54" font-size="14" text-anchor="middle" fill="#FFFFFF" transform="rotate(-6 80 39)">（已贴停运告示）</text>
+    </g>
+    <!-- 箭头 -->
+    <path d="M 170 96 L 170 128" stroke="#2D2A32" stroke-width="5" marker-end="url(#arr)"/>
+  </g>
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#2D2A32"/>
+    </marker>
+  </defs>
+
+  <!-- ===== 中层：C++ 枢纽 ===== -->
+  <g transform="translate(70,470)">
+    <rect x="0" y="0" width="1060" height="180" rx="18" fill="#8E9AAF" stroke="#2D2A32" stroke-width="4"/>
+    <text x="26" y="38" font-size="24" font-weight="bold" fill="#FFFFFF">C++ 地下枢纽 ReactCommon/（双端共享，一份代码两端用）</text>
+    <!-- 四个车间 -->
+    <g stroke="#2D2A32" stroke-width="3">
+      <rect x="40" y="58" width="210" height="96" fill="#FFFFFF"/>
+      <rect x="290" y="58" width="210" height="96" fill="#FFFFFF"/>
+      <rect x="540" y="58" width="210" height="96" fill="#FFFFFF"/>
+      <rect x="790" y="58" width="210" height="96" fill="#FFFFFF"/>
+    </g>
+    <text x="145" y="88" font-size="15" font-weight="bold" text-anchor="middle" fill="#2D2A32">jsi/（电梯机房）</text>
+    <text x="145" y="112" font-size="13" text-anchor="middle" fill="#2D2A32">Runtime 抽象接口</text>
+    <text x="145" y="132" font-size="13" text-anchor="middle" fill="#2D2A32">Hermes/JSC 都能插</text>
+    <text x="395" y="88" font-size="15" font-weight="bold" text-anchor="middle" fill="#2D2A32">react/renderer/（渲染车间）</text>
+    <text x="395" y="112" font-size="13" text-anchor="middle" fill="#2D2A32">Fabric：影子树</text>
+    <text x="395" y="132" font-size="13" text-anchor="middle" fill="#2D2A32">commit → diff → mount</text>
+    <text x="645" y="88" font-size="15" font-weight="bold" text-anchor="middle" fill="#2D2A32">yoga/（测量工坊）</text>
+    <text x="645" y="112" font-size="13" text-anchor="middle" fill="#2D2A32">Flexbox 布局引擎</text>
+    <text x="645" y="132" font-size="13" text-anchor="middle" fill="#2D2A32">算出每个盒子的坐标</text>
+    <text x="895" y="88" font-size="15" font-weight="bold" text-anchor="middle" fill="#2D2A32">cxxreact/ + jsiexecutor</text>
+    <text x="895" y="112" font-size="13" text-anchor="middle" fill="#2D2A32">ReactInstance 运行时</text>
+    <text x="895" y="132" font-size="13" text-anchor="middle" fill="#2D2A32">TurboModule 地基</text>
+  </g>
+
+  <!-- ===== 下层：原生双大陆 ===== -->
+  <g transform="translate(70,676)">
+    <rect x="0" y="0" width="515" height="52" rx="12" fill="#6BCB77" stroke="#2D2A32" stroke-width="4"/>
+    <text x="258" y="33" font-size="19" font-weight="bold" text-anchor="middle" fill="#2D2A32">Android 大陆 · ReactAndroid/（Kotlin + JNI）</text>
+    <rect x="545" y="0" width="515" height="52" rx="12" fill="#FF9F45" stroke="#2D2A32" stroke-width="4"/>
+    <text x="802" y="33" font-size="19" font-weight="bold" text-anchor="middle" fill="#2D2A32">iOS 大陆 · React/ + ReactApple/（ObjC + Swift）</text>
+  </g>
+
+  <!-- 右上角小注 -->
+  <g transform="translate(960,60)">
+    <rect x="0" y="0" width="170" height="56" rx="10" fill="#FFF9EC" stroke="#2D2A32" stroke-width="3" stroke-dasharray="7 5"/>
+    <text x="85" y="24" font-size="13" text-anchor="middle" fill="#2D2A32">地图对应源码目录</text>
+    <text x="85" y="44" font-size="13" text-anchor="middle" fill="#2D2A32">详见下一节表格</text>
+  </g>
+</svg>

@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif">
+  <rect width="1200" height="800" fill="#FFF0F0"/>
+  <rect x="14" y="14" width="1172" height="772" rx="26" fill="none" stroke="#2D2A32" stroke-width="4"/>
+
+  <!-- 标题 -->
+  <rect x="60" y="40" width="620" height="70" rx="16" fill="#2D2A32"/>
+  <text x="86" y="72" font-size="28" font-weight="bold" fill="#FF6B9D">第五幕 · Fabric 渲染引擎的一天</text>
+  <text x="86" y="98" font-size="17" fill="#FFFFFF">React 交稿 → 影子树 commit → 算法拆快递 → 原生 mount</text>
+
+  <!-- 站点1：React 交稿 -->
+  <g transform="translate(70,150)">
+    <rect x="0" y="0" width="240" height="150" rx="16" fill="#61DAFB" stroke="#2D2A32" stroke-width="4"/>
+    <text x="120" y="36" font-size="18" font-weight="bold" text-anchor="middle" fill="#2D2A32">① React 交稿</text>
+    <text x="120" y="62" font-size="13.5" text-anchor="middle" fill="#2D2A32">JS：setState 后的新界面</text>
+    <text x="120" y="84" font-size="13.5" text-anchor="middle" fill="#2D2A32">经 ReactFabric 递进 C++</text>
+    <text x="120" y="106" font-size="12.5" text-anchor="middle" fill="#2D2A32">UIManager.completeSurface</text>
+    <text x="120" y="126" font-size="12.5" text-anchor="middle" fill="#2D2A32">（UIManager.cpp:L191）</text>
+  </g>
+  <path d="M 314 225 L 352 225" stroke="#2D2A32" stroke-width="5"/>
+  <path d="M 342 215 L 356 225 L 342 235 Z" fill="#2D2A32"/>
+
+  <!-- 站点2：影子树 commit -->
+  <g transform="translate(360,150)">
+    <rect x="0" y="0" width="280" height="150" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="4"/>
+    <text x="140" y="36" font-size="18" font-weight="bold" text-anchor="middle" fill="#2D2A32">② 影子树 commit</text>
+    <!-- 两棵小树 -->
+    <g stroke="#2D2A32" stroke-width="2.5" fill="none">
+      <line x1="70" y1="120" x2="70" y2="88"/><line x1="70" y1="88" x2="52" y2="70"/><line x1="70" y1="88" x2="88" y2="70"/>
+      <line x1="200" y1="120" x2="200" y2="88"/><line x1="200" y1="88" x2="182" y2="70"/><line x1="200" y1="88" x2="218" y2="70"/><line x1="218" y1="70" x2="232" y2="58"/>
+    </g>
+    <text x="70" y="138" font-size="12.5" text-anchor="middle" fill="#2D2A32">旧 revision</text>
+    <text x="205" y="138" font-size="12.5" text-anchor="middle" fill="#2D2A32">新 revision</text>
+    <text x="140" y="60" font-size="12.5" text-anchor="middle" fill="#2D2A32">ShadowTree.commit 失败会重试</text>
+  </g>
+  <path d="M 644 225 L 682 225" stroke="#2D2A32" stroke-width="5"/>
+  <path d="M 672 215 L 686 225 L 672 235 Z" fill="#2D2A32"/>
+
+  <!-- 站点3：Yoga 测量 -->
+  <g transform="translate(690,150)">
+    <rect x="0" y="0" width="220" height="150" rx="16" fill="#FFD93D" stroke="#2D2A32" stroke-width="4"/>
+    <text x="110" y="36" font-size="18" font-weight="bold" text-anchor="middle" fill="#2D2A32">③ Yoga 测量</text>
+    <text x="110" y="62" font-size="13.5" text-anchor="middle" fill="#2D2A32">layoutIfNeeded() 就地布局</text>
+    <!-- 尺子 -->
+    <g transform="translate(30,86)">
+      <rect x="0" y="0" width="160" height="24" rx="6" fill="#FFF9EC" stroke="#2D2A32" stroke-width="2.5"/>
+      <line x1="20" y1="0" x2="20" y2="8" stroke="#2D2A32" stroke-width="2"/>
+      <line x1="50" y1="0" x2="50" y2="12" stroke="#2D2A32" stroke-width="2"/>
+      <line x1="80" y1="0" x2="80" y2="8" stroke="#2D2A32" stroke-width="2"/>
+      <line x1="110" y1="0" x2="110" y2="12" stroke="#2D2A32" stroke-width="2"/>
+      <line x1="140" y1="0" x2="140" y2="8" stroke="#2D2A32" stroke-width="2"/>
+    </g>
+    <text x="110" y="134" font-size="12.5" text-anchor="middle" fill="#2D2A32">YogaLayoutableShadowNode</text>
+  </g>
+  <path d="M 914 225 L 952 225" stroke="#2D2A32" stroke-width="5"/>
+  <path d="M 942 215 L 956 225 L 942 235 Z" fill="#2D2A32"/>
+
+  <!-- 站点4：diff -->
+  <g transform="translate(960,150)">
+    <rect x="0" y="0" width="170" height="150" rx="16" fill="#C8B6FF" stroke="#2D2A32" stroke-width="4"/>
+    <text x="85" y="36" font-size="18" font-weight="bold" text-anchor="middle" fill="#2D2A32">④ Diff 拆单</text>
+    <text x="85" y="62" font-size="13" text-anchor="middle" fill="#2D2A32">Differentiator.cpp</text>
+    <text x="85" y="84" font-size="13" text-anchor="middle" fill="#2D2A32">calculateShadowView</text>
+    <text x="85" y="102" font-size="13" text-anchor="middle" fill="#2D2A32">Mutations(...)</text>
+    <text x="85" y="128" font-size="12.5" text-anchor="middle" fill="#2D2A32">只找"变化的差异"</text>
+  </g>
+
+  <!-- 中部：指令清单 -->
+  <g transform="translate(70,360)">
+    <rect x="0" y="0" width="1060" height="180" rx="16" fill="#2D2A32"/>
+    <text x="530" y="38" font-size="19" font-weight="bold" text-anchor="middle" fill="#FF6B9D">⑤ 生成 Mount 指令清单（ShadowViewMutation）</text>
+    <g font-size="15" font-weight="bold">
+      <rect x="50" y="66" width="180" height="56" rx="10" fill="#6BCB77"/><text x="140" y="100" text-anchor="middle" fill="#2D2A32">CREATE 建视图</text>
+      <rect x="260" y="66" width="180" height="56" rx="10" fill="#FFD93D"/><text x="350" y="100" text-anchor="middle" fill="#2D2A32">INSERT 挂子树</text>
+      <rect x="470" y="66" width="180" height="56" rx="10" fill="#61DAFB"/><text x="560" y="100" text-anchor="middle" fill="#2D2A32">UPDATE 改属性</text>
+      <rect x="680" y="66" width="180" height="56" rx="10" fill="#FF9F45"/><text x="770" y="100" text-anchor="middle" fill="#2D2A32">REMOVE 摘子树</text>
+      <rect x="890" y="66" width="130" height="56" rx="10" fill="#FF6B9D"/><text x="955" y="100" text-anchor="middle" fill="#FFF9EC">DELETE 销毁</text>
+    </g>
+    <text x="530" y="156" text-anchor="middle" font-size="13.5" fill="#FFFFFF">平化节点变化时递归展开子树差异（Differentiator.cpp:L195-L232）—— 列表/布局结构的秘密就藏在这</text>
+  </g>
+
+  <!-- 底部：mount 上屏 -->
+  <g transform="translate(70,580)">
+    <rect x="0" y="0" width="1060" height="140" rx="16" fill="#6BCB77" stroke="#2D2A32" stroke-width="4"/>
+    <text x="530" y="40" font-size="19" font-weight="bold" text-anchor="middle" fill="#2D2A32">⑥ MountingCoordinator 推进 revision，指令上屏</text>
+    <text x="530" y="70" font-size="14" text-anchor="middle" fill="#2D2A32">不整树替换 —— 基于版本号增量推进，旧树异步销毁（MountingCoordinator.cpp:L179-L188）</text>
+    <text x="530" y="100" font-size="14" text-anchor="middle" fill="#2D2A32">Android：FabricUIManager 执行指令　iOS：RCTViewComponentView 逐条上屏</text>
+    <text x="530" y="126" font-size="13" text-anchor="middle" fill="#2D2A32">commit 成功后还会回发 layout events（ShadowTree.cpp:L464-L489）</text>
+  </g>
+
+  <!-- 底注 -->
+  <text x="600" y="762" font-size="15" text-anchor="middle" fill="#2D2A32">一句话：Fabric = C++ 里的一棵"影子树" + 一套"版本化 diff" + 一组"平台无关指令"</text>
+</svg>

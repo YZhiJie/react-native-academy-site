@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" font-family="'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif">
+  <rect width="1200" height="800" fill="#FDF0F4"/>
+  <rect x="14" y="14" width="1172" height="772" rx="26" fill="none" stroke="#2D2A32" stroke-width="4"/>
+
+  <!-- 标题 -->
+  <rect x="60" y="40" width="660" height="70" rx="16" fill="#2D2A32"/>
+  <text x="86" y="72" font-size="28" font-weight="bold" fill="#61DAFB">终幕 · 一次点击的完整旅程</text>
+  <text x="86" y="98" font-size="17" fill="#FFFFFF">原生触摸 → C++ 事件管线 → React 调度 → commit → 上屏，全链路一圈</text>
+
+  <!-- 中央圆 -->
+  <circle cx="600" cy="440" r="95" fill="#2D2A32"/>
+  <text x="600" y="424" font-size="20" font-weight="bold" text-anchor="middle" fill="#FFD93D">一次点击</text>
+  <text x="600" y="450" font-size="20" font-weight="bold" text-anchor="middle" fill="#FFD93D">的旅程</text>
+  <text x="600" y="478" font-size="12.5" text-anchor="middle" fill="#FFFFFF">JS ⇄ C++ ⇄ Native</text>
+
+  <!-- 环形轨道 -->
+  <circle cx="600" cy="440" r="235" fill="none" stroke="#2D2A32" stroke-width="2.5" stroke-dasharray="10 8"/>
+
+  <!-- 8 个站点 -->
+  <g font-size="13.5" font-weight="bold">
+    <g transform="translate(600,150)">
+      <rect x="-105" y="-26" width="210" height="52" rx="12" fill="#61DAFB" stroke="#2D2A32" stroke-width="3"/>
+      <text x="0" y="-4" text-anchor="middle" fill="#2D2A32">① 手指按下</text>
+      <text x="0" y="16" text-anchor="middle" font-size="11.5" font-weight="normal" fill="#2D2A32">系统触摸事件（UI 线程）</text>
+    </g>
+    <g transform="translate(770,278)">
+      <rect x="-100" y="-26" width="200" height="52" rx="12" fill="#FFD93D" stroke="#2D2A32" stroke-width="3"/>
+      <text x="0" y="-4" text-anchor="middle" fill="#2D2A32">② 事件管线入队</text>
+      <text x="0" y="16" text-anchor="middle" font-size="11.5" font-weight="normal" fill="#2D2A32">C++ EventDispatcher</text>
+    </g>
+    <g transform="translate(838,440)">
+      <rect x="-100" y="-26" width="200" height="52" rx="12" fill="#6BCB77" stroke="#2D2A32" stroke-width="3"/>
+      <text x="0" y="-4" text-anchor="middle" fill="#2D2A32">③ 分发到 JS</text>
+      <text x="0" y="16" text-anchor="middle" font-size="11.5" font-weight="normal" fill="#2D2A32">ReactFabric.handleEvent</text>
+    </g>
+    <g transform="translate(770,602)">
+      <rect x="-100" y="-26" width="200" height="52" rx="12" fill="#9B5DE5" stroke="#2D2A32" stroke-width="3"/>
+      <text x="0" y="-4" text-anchor="middle" fill="#FFFFFF">④ React 调度更新</text>
+      <text x="0" y="16" text-anchor="middle" font-size="11.5" font-weight="normal" fill="#FFF9EC">setState → reconciler</text>
+    </g>
+    <g transform="translate(600,730)">
+      <rect x="-105" y="-26" width="210" height="52" rx="12" fill="#FF9F45" stroke="#2D2A32" stroke-width="3"/>
+      <text x="0" y="-4" text-anchor="middle" fill="#2D2A32">⑤ commit 影子树</text>
+      <text x="0" y="16" text-anchor="middle" font-size="11.5" font-weight="normal" fill="#2D2A32">冲突重试（ShadowTree）</text>
+    </g>
+    <g transform="translate(430,602)">
+      <rect x="-100" y="-26" width="200" height="52" rx="12" fill="#FF6B9D" stroke="#2D2A32" stroke-width="3"/>
+      <text x="0" y="-4" text-anchor="middle" fill="#2D2A32">⑥ Yoga + diff</text>
+      <text x="0" y="16" text-anchor="middle" font-size="11.5" font-weight="normal" fill="#2D2A32">布局 → 五种指令</text>
+    </g>
+    <g transform="translate(362,440)">
+      <rect x="-100" y="-26" width="200" height="52" rx="12" fill="#C8B6FF" stroke="#2D2A32" stroke-width="3"/>
+      <text x="0" y="-4" text-anchor="middle" fill="#2D2A32">⑦ mount 上屏</text>
+      <text x="0" y="16" text-anchor="middle" font-size="11.5" font-weight="normal" fill="#2D2A32">平台视图逐条执行</text>
+    </g>
+    <g transform="translate(430,278)">
+      <rect x="-100" y="-26" width="200" height="52" rx="12" fill="#FFF9EC" stroke="#2D2A32" stroke-width="3"/>
+      <text x="0" y="-4" text-anchor="middle" fill="#2D2A32">⑧ 回声：layout events</text>
+      <text x="0" y="16" text-anchor="middle" font-size="11.5" font-weight="normal" fill="#2D2A32">onLayout 回到 JS</text>
+    </g>
+  </g>
+
+  <!-- 流向箭头（小三角） -->
+  <g fill="#2D2A32">
+    <path d="M 700 218 L 716 232 L 696 234 Z"/>
+    <path d="M 812 352 L 822 370 L 804 366 Z"/>
+    <path d="M 826 524 L 816 542 L 806 526 Z"/>
+    <path d="M 712 668 L 694 676 L 700 658 Z"/>
+    <path d="M 512 676 L 494 668 L 500 686 Z"/>
+    <path d="M 388 542 L 378 524 L 370 540 Z"/>
+    <path d="M 376 366 L 386 352 L 394 368 Z"/>
+    <path d="M 494 232 L 512 218 L 504 236 Z"/>
+  </g>
+
+  <!-- 底部：线程速查 -->
+  <g transform="translate(60,702)">
+    <rect x="0" y="0" width="1080" height="42" rx="12" fill="#2D2A32"/>
+    <text x="540" y="27" font-size="14" text-anchor="middle" fill="#FFFFFF">线程速查：①⑦ 原生 UI 线程 ｜ ②⑤⑥ C++ 渲染线程 ｜ ③④⑧ JS 线程 —— 三班倒，互不堵门</text>
+  </g>
+  <!-- 底注 -->
+  <text x="600" y="766" font-size="14" text-anchor="middle" fill="#2D2A32">这一圈把前面八幕全部串了起来 —— 每一帧动画，都是几百次这样的旅程</text>
+</svg>

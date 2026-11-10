@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" width="1200" height="620" role="img" aria-label="地图与轨迹数据管线：NMEA 到本地坐标、抽稀、绘制与回放">
+  <defs>
+    <marker id="a15" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2D2A32"/>
+    </marker>
+    <style>
+      .t { font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; fill: #2D2A32; }
+      .s { font-size: 14px; fill: #5B5663; }
+      .b { font-size: 18px; font-weight: 700; }
+      .mono { font-family: 'SFMono-Regular',Menlo,Consolas,monospace; font-size: 13px; fill: #5B5663; }
+      .arrow { stroke: #2D2A32; stroke-width: 3; fill: none; marker-end: url(#a15); }
+    </style>
+  </defs>
+
+  <rect width="1200" height="620" fill="#F2EFE6"/>
+  <rect x="0" y="0" width="1200" height="76" fill="#2D2A32"/>
+  <text x="40" y="50" class="t" fill="#FFD93D" font-size="28" font-weight="700">地图管线：先统一坐标，再谈画得快</text>
+
+  <rect x="40" y="110" width="220" height="150" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="150" y="145" text-anchor="middle" class="t b">NMEA / 遥测</text>
+  <text x="150" y="174" text-anchor="middle" class="t s">$GNGGA, ...*5A</text>
+  <text x="150" y="198" text-anchor="middle" class="t s">lat / lon / fixQuality</text>
+  <text x="150" y="222" text-anchor="middle" class="t s">2Hz 位姿（本地米制）</text>
+  <text x="150" y="246" text-anchor="middle" class="mono">core/nmea/parser.ts</text>
+
+  <rect x="320" y="110" width="240" height="150" rx="16" fill="#E8F6F8" stroke="#2D2A32" stroke-width="3"/>
+  <text x="440" y="145" text-anchor="middle" class="t b">统一到本地米制</text>
+  <text x="440" y="174" text-anchor="middle" class="t s">等距圆柱切平面</text>
+  <text x="440" y="198" text-anchor="middle" class="t s">x 向东 / y 向北 / 单位米</text>
+  <text x="440" y="222" text-anchor="middle" class="t s">地块 &lt; 500m 时误差厘米级</text>
+  <text x="440" y="246" text-anchor="middle" class="mono">core/geo/projection.ts</text>
+
+  <rect x="620" y="110" width="230" height="150" rx="16" fill="#FFF6D6" stroke="#2D2A32" stroke-width="3"/>
+  <text x="735" y="145" text-anchor="middle" class="t b">地块 / 轨迹</text>
+  <text x="735" y="174" text-anchor="middle" class="t s">手动画点闭合多边形</text>
+  <text x="735" y="198" text-anchor="middle" class="t s">面积 / 周长 / 自相交</text>
+  <text x="735" y="222" text-anchor="middle" class="t s">AsyncStorage 持久化</text>
+  <text x="735" y="246" text-anchor="middle" class="mono">core/geo/polygon.ts</text>
+
+  <rect x="910" y="110" width="250" height="150" rx="16" fill="#EFE8FF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="1035" y="145" text-anchor="middle" class="t b">抽稀 + 绘制</text>
+  <text x="1035" y="174" text-anchor="middle" class="t s">径向粗筛 → RDP</text>
+  <text x="1035" y="198" text-anchor="middle" class="t s">2 万点 → 约 200 点</text>
+  <text x="1035" y="222" text-anchor="middle" class="t s">SVG path 只生成一次</text>
+  <text x="1035" y="246" text-anchor="middle" class="mono">core/geo/decimate.ts</text>
+
+  <path d="M260 185 L320 185" class="arrow"/>
+  <path d="M560 185 L620 185" class="arrow"/>
+  <path d="M850 185 L910 185" class="arrow"/>
+
+  <rect x="40" y="310" width="520" height="250" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="60" y="345" class="t b">抽稀不是“丢数据”，而是分离两种用途</text>
+  <text x="60" y="380" class="t s">绘制：只保留屏幕 1pt 内有信息增量的点，path 字符串才不会到数 MB。</text>
+  <text x="60" y="408" class="t s">落盘 / 回放 / 面积统计：必须用原始点，否则轨迹长度与覆盖率失真。</text>
+  <text x="60" y="436" class="t s">实时：IncrementalDecimator 每来一点做 O(1) 径向判断；</text>
+  <text x="60" y="464" class="t s">收车：RDP 做一次最终简化，保留拐弯特征。</text>
+  <text x="60" y="500" class="t s" fill="#C0392B">实测：20,000 → 200 点，Hermes 单线程 109.8ms；未测渲染 FPS。</text>
+  <text x="60" y="530" class="t s">回放：按 sample.t 二分查找 + 线性插值，而不是按第几个点推进。</text>
+
+  <rect x="600" y="310" width="560" height="250" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="620" y="345" class="t b">回放时间轴</text>
+  <line x1="640" y1="400" x2="1120" y2="400" stroke="#2D2A32" stroke-width="3"/>
+  <circle cx="640" cy="400" r="8" fill="#6BCB77"/>
+  <circle cx="760" cy="400" r="8" fill="#61DAFB"/>
+  <circle cx="930" cy="400" r="8" fill="#FF6B9D"/>
+  <circle cx="1120" cy="400" r="8" fill="#2D2A32"/>
+  <text x="640" y="435" text-anchor="middle" class="mono">t0</text>
+  <text x="760" y="435" text-anchor="middle" class="mono">t1</text>
+  <text x="930" y="435" text-anchor="middle" class="mono">t2</text>
+  <text x="1120" y="435" text-anchor="middle" class="mono">tn</text>
+  <text x="620" y="478" class="t s">每个样本自带时间戳；丢包造成的空洞不会让机器人瞬移。</text>
+  <text x="620" y="506" class="t s">变速只改变 elapsed × speed，不改变样本本身。</text>
+  <text x="620" y="534" class="t s">拖动进度条 = seek(progress)，回放位置始终可解释。</text>
+</svg>

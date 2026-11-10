@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700" role="img" aria-label="抽奖链路与风控：验签、频控、幂等、奖池决策、原子扣减，以及并发超发对比">
+  <defs>
+    <marker id="a18" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2D2A32"/>
+    </marker>
+    <style>
+      .t { font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; fill: #2D2A32; }
+      .s { font-size: 14px; fill: #5B5663; }
+      .b { font-size: 18px; font-weight: 700; }
+      .mono { font-family: 'SFMono-Regular',Menlo,Consolas,monospace; font-size: 12px; fill: #5B5663; }
+      .arrow { stroke: #2D2A32; stroke-width: 3; fill: none; marker-end: url(#a18); }
+    </style>
+  </defs>
+
+  <rect width="1200" height="700" fill="#F2EFE6"/>
+  <rect x="0" y="0" width="1200" height="76" fill="#2D2A32"/>
+  <text x="40" y="50" fill="#FFD93D" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="28" font-weight="700">抽奖一次，过五道关：验签 → 频控 → 次数 → 幂等 → 原子扣减</text>
+
+  <!-- 请求链路 -->
+  <rect x="40" y="105" width="150" height="70" rx="14" fill="#E8F6F8" stroke="#2D2A32" stroke-width="2.5"/>
+  <text x="115" y="135" text-anchor="middle" class="t b">客户端</text>
+  <text x="115" y="158" text-anchor="middle" class="mono">userId + requestId</text>
+
+  <rect x="230" y="105" width="150" height="70" rx="14" fill="#FFF6D6" stroke="#2D2A32" stroke-width="2.5"/>
+  <text x="305" y="132" text-anchor="middle" class="t b">① 验签</text>
+  <text x="305" y="155" text-anchor="middle" class="t s">时间窗 / nonce</text>
+
+  <rect x="420" y="105" width="150" height="70" rx="14" fill="#FFF6D6" stroke="#2D2A32" stroke-width="2.5"/>
+  <text x="495" y="132" text-anchor="middle" class="t b">② 频控</text>
+  <text x="495" y="155" text-anchor="middle" class="t s">用户桶 + IP 桶</text>
+
+  <rect x="610" y="105" width="150" height="70" rx="14" fill="#FFF6D6" stroke="#2D2A32" stroke-width="2.5"/>
+  <text x="685" y="132" text-anchor="middle" class="t b">③ 次数</text>
+  <text x="685" y="155" text-anchor="middle" class="t s">每日 / 总次数</text>
+
+  <rect x="800" y="105" width="150" height="70" rx="14" fill="#FFF6D6" stroke="#2D2A32" stroke-width="2.5"/>
+  <text x="875" y="132" text-anchor="middle" class="t b">④ 幂等</text>
+  <text x="875" y="155" text-anchor="middle" class="t s">重放直接返回</text>
+
+  <rect x="990" y="105" width="170" height="70" rx="14" fill="#FFE9F1" stroke="#2D2A32" stroke-width="2.5"/>
+  <text x="1075" y="132" text-anchor="middle" class="t b">⑤ 奖池 + 扣减</text>
+  <text x="1075" y="155" text-anchor="middle" class="t s">同一临界区完成</text>
+
+  <path d="M190 140 L230 140" class="arrow"/>
+  <path d="M380 140 L420 140" class="arrow"/>
+  <path d="M570 140 L610 140" class="arrow"/>
+  <path d="M760 140 L800 140" class="arrow"/>
+  <path d="M950 140 L990 140" class="arrow"/>
+
+  <!-- 奖池决策优先级 -->
+  <rect x="40" y="210" width="520" height="210" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="60" y="245" class="t b">奖池决策：优先级不能反</text>
+  <rect x="60" y="265" width="480" height="34" rx="8" fill="#FFE9F1"/>
+  <text x="72" y="288" class="t s">1. 预算熔断：已花 ≥ 预算 → 谢谢参与</text>
+  <rect x="60" y="305" width="480" height="34" rx="8" fill="#FFF6D6"/>
+  <text x="72" y="328" class="t s">2. 保底：连续未中 N 次 → 必出非谢谢参与</text>
+  <rect x="60" y="345" width="480" height="34" rx="8" fill="#E9F7EC"/>
+  <text x="72" y="368" class="t s">3. 权重轮盘：整数万分比，总和 10000</text>
+  <rect x="60" y="385" width="480" height="26" rx="8" fill="#F1F0EC"/>
+  <text x="72" y="403" class="t s">4. 库存兜底：可发奖品为空 → 谢谢参与</text>
+
+  <!-- 并发对比 -->
+  <rect x="590" y="210" width="570" height="210" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="610" y="245" class="t b">库存 10 件，60 并发（原型实测）</text>
+
+  <rect x="610" y="262" width="250" height="130" rx="12" fill="#FFE9F1" stroke="#C0392B" stroke-width="2"/>
+  <text x="735" y="288" text-anchor="middle" class="t b" fill="#C0392B">读 → await → 写</text>
+  <text x="735" y="318" text-anchor="middle" class="t s">都读到 10，都写 9</text>
+  <text x="735" y="344" text-anchor="middle" class="t b" fill="#C0392B">发出 60 件</text>
+  <text x="735" y="370" text-anchor="middle" class="t s">超发 50 件 · 剩余 9</text>
+
+  <rect x="890" y="262" width="250" height="130" rx="12" fill="#E9F7EC" stroke="#2E7D32" stroke-width="2"/>
+  <text x="1015" y="288" text-anchor="middle" class="t b" fill="#2E7D32">读 → 判 → 扣（无 await）</text>
+  <text x="1015" y="318" text-anchor="middle" class="t s">单进程内不会被插入</text>
+  <text x="1015" y="344" text-anchor="middle" class="t b" fill="#2E7D32">发出 10 件</text>
+  <text x="1015" y="370" text-anchor="middle" class="t s">剩余 0 · 多实例需 Lua/行锁</text>
+
+  <!-- 幂等 -->
+  <rect x="40" y="450" width="360" height="200" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="60" y="485" class="t b">幂等：两个 id 分工</text>
+  <text x="60" y="518" class="t s">requestId：客户端生成，重试不变</text>
+  <text x="60" y="544" class="t s">recordId：服务端生成，用于对账</text>
+  <text x="60" y="578" class="t s">键 = userId + requestId</text>
+  <text x="60" y="604" class="t s" fill="#2E7D32">重放 → 200 + 同一条记录</text>
+  <text x="60" y="630" class="t s" fill="#C0392B">不是返回「重复请求」错误</text>
+
+  <!-- 签名 -->
+  <rect x="430" y="450" width="360" height="200" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="450" y="485" class="t b">待签串：四要素</text>
+  <text x="450" y="516" class="mono">METHOD + PATH</text>
+  <text x="450" y="538" class="mono">+ 排序 query + body 摘要</text>
+  <text x="450" y="560" class="mono">+ timestamp + nonce</text>
+  <text x="450" y="592" class="t s" fill="#C0392B">secret 在 bundle 里 → 防不住逆向</text>
+  <text x="450" y="618" class="t s">真正防刷靠会话 / 指纹 / 名单 / 验证码</text>
+
+  <!-- 助力 -->
+  <rect x="820" y="450" width="340" height="200" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="840" y="485" class="t b">助力三约束</text>
+  <text x="840" y="518" class="t s">① 不能给自己助力</text>
+  <text x="840" y="546" class="t s">② 同一好友只算一次</text>
+  <text x="840" y="574" class="t s">③ 助力人数有上限</text>
+  <text x="840" y="610" class="t s" fill="#9B5DE5">DB 唯一索引 (owner_id, helper_id) 兜底</text>
+  <text x="840" y="636" class="t s">奖励按「助力记录」幂等，而不是按次数</text>
+</svg>

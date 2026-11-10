@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700" role="img" aria-label="覆盖规划流程：往复式割草线、障碍物裁剪、栅格 A* 绕行">
+  <defs>
+    <marker id="a16" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2D2A32"/>
+    </marker>
+    <style>
+      .t { font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; fill: #2D2A32; }
+      .s { font-size: 14px; fill: #5B5663; }
+      .b { font-size: 18px; font-weight: 700; }
+      .mono { font-family: 'SFMono-Regular',Menlo,Consolas,monospace; font-size: 13px; fill: #5B5663; }
+      .arrow { stroke: #2D2A32; stroke-width: 3; fill: none; marker-end: url(#a16); }
+    </style>
+  </defs>
+
+  <rect width="1200" height="700" fill="#F2EFE6"/>
+  <rect x="0" y="0" width="1200" height="76" fill="#2D2A32"/>
+  <text x="40" y="50" class="t" fill="#FFD93D" font-size="28" font-weight="700">覆盖规划：规则先行，算法兜底</text>
+
+  <rect x="40" y="110" width="250" height="170" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="165" y="145" text-anchor="middle" class="t b">1. 多边形输入</text>
+  <text x="165" y="175" text-anchor="middle" class="t s">手动画点 / 边界采集</text>
+  <text x="165" y="199" text-anchor="middle" class="t s">自相交检查</text>
+  <text x="165" y="223" text-anchor="middle" class="t s">margin ≥ 机器半径</text>
+  <text x="165" y="247" text-anchor="middle" class="t s">spacing ≈ 割幅 × 0.9</text>
+  <text x="165" y="266" text-anchor="middle" class="mono">plan/boustrophedon.ts</text>
+
+  <rect x="330" y="110" width="260" height="170" rx="16" fill="#FFF6D6" stroke="#2D2A32" stroke-width="3"/>
+  <text x="460" y="145" text-anchor="middle" class="t b">2. 往复式割草线</text>
+  <text x="460" y="175" text-anchor="middle" class="t s">旋转到割幅方向为 x 轴</text>
+  <text x="460" y="199" text-anchor="middle" class="t s">扫描线与多边形求交</text>
+  <text x="460" y="223" text-anchor="middle" class="t s">交点奇偶配对 → 行内区间</text>
+  <text x="460" y="247" text-anchor="middle" class="t s">逐行交替方向 + 转弯点</text>
+  <text x="460" y="266" text-anchor="middle" class="mono">swaths / waypoints</text>
+
+  <rect x="630" y="110" width="250" height="170" rx="16" fill="#FFE9F1" stroke="#2D2A32" stroke-width="3"/>
+  <text x="755" y="145" text-anchor="middle" class="t b">3. 障碍物裁剪</text>
+  <text x="755" y="175" text-anchor="middle" class="t s">圆 / 矩形 → 路径 t 区间</text>
+  <text x="755" y="199" text-anchor="middle" class="t s">按“机器半径 + 安全距离”膨胀</text>
+  <text x="755" y="223" text-anchor="middle" class="t s">一次差集，避免重复计算</text>
+  <text x="755" y="247" text-anchor="middle" class="t s">凹多边形同一行可多段</text>
+  <text x="755" y="266" text-anchor="middle" class="mono">plan/coverage.ts</text>
+
+  <rect x="920" y="110" width="240" height="170" rx="16" fill="#E8F6F8" stroke="#2D2A32" stroke-width="3"/>
+  <text x="1040" y="145" text-anchor="middle" class="t b">4. 连接与绕行</text>
+  <text x="1040" y="175" text-anchor="middle" class="t s">直线可达 → 直接连</text>
+  <text x="1040" y="199" text-anchor="middle" class="t s">被挡 → 栅格 BFS / A*</text>
+  <text x="1040" y="223" text-anchor="middle" class="t s">octile 启发 + 二叉堆</text>
+  <text x="1040" y="247" text-anchor="middle" class="t s">line-of-sight 平滑</text>
+  <text x="1040" y="266" text-anchor="middle" class="mono">plan/grid.ts</text>
+
+  <path d="M290 195 L330 195" class="arrow"/>
+  <path d="M590 195 L630 195" class="arrow"/>
+  <path d="M880 195 L920 195" class="arrow"/>
+
+  <!-- grid illustration -->
+  <rect x="40" y="330" width="540" height="250" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="60" y="365" class="t b">栅格膨胀：A* 不贴边蹭树</text>
+  <g stroke="#D8D3C7" stroke-width="1">
+    <path d="M80 390 H540 M80 418 H540 M80 446 H540 M80 474 H540 M80 502 H540 M80 530 H540"/>
+    <path d="M80 390 V530 M110 390 V530 M140 390 V530 M170 390 V530 M200 390 V530 M230 390 V530 M260 390 V530 M290 390 V530 M320 390 V530 M350 390 V530 M380 390 V530 M410 390 V530 M440 390 V530 M470 390 V530 M500 390 V530 M530 390 V530"/>
+  </g>
+  <circle cx="290" cy="465" r="34" fill="#FFD6D6" stroke="#C0392B" stroke-width="2"/>
+  <circle cx="290" cy="465" r="16" fill="#C0392B"/>
+  <text x="290" y="520" text-anchor="middle" class="t s">树 + 膨胀区</text>
+  <path d="M120 510 C180 510 210 465 240 465 L340 465 C370 465 400 510 460 510" stroke="#1F7A8C" stroke-width="4" fill="none"/>
+  <text x="460" y="552" text-anchor="middle" class="t s" fill="#1F7A8C">A* 绕行（平滑后）</text>
+
+  <rect x="620" y="330" width="540" height="250" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="640" y="365" class="t b">为什么先 BFS 再 A*</text>
+  <text x="640" y="400" class="t s">BFS 只回答“能不能到”，四邻域，实现简单、结果稳定；</text>
+  <text x="640" y="428" class="t s">A* 回答“怎么走最短”，八方向 + octile 启发 + 二叉堆；</text>
+  <text x="640" y="456" class="t s">被完全隔断时 A* 会展开整个连通域才失败，BFS 更适合前置判定。</text>
+  <text x="640" y="492" class="t s">斜向移动禁止穿墙角：两个正交邻格都必须可走。</text>
+  <text x="640" y="520" class="t s">终点若落在膨胀区，nearestFree 向外找最近空闲格。</text>
+  <text x="640" y="552" class="t s" fill="#C0392B">代价：0.2m 栅格、100×60m 地块约 15 万格；更大范围应下沉原生。</text>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="React Native 源码学院">
+  <!--
+    派生自 docs/assets/comics/00-intro.svg 顶部「原子轨道」装饰，
+    配色取自 docs/assets/comics/manifest.json 的 styleGuide：
+    ink #2D2A32 / React 蓝 #61DAFB / 强调橙 #FF9F45 / 纸底 #FFF9EC。
+    漫画分镜的粗描边 + 圆角徽章，保证 16px 下仍可辨认。
+  -->
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="#FFF9EC" stroke="#2D2A32" stroke-width="4"/>
+  <g fill="none" stroke="#2D2A32" stroke-width="3.8" stroke-linecap="round">
+    <ellipse cx="32" cy="32" rx="19" ry="7.4" transform="rotate(-25 32 32)"/>
+    <ellipse cx="32" cy="32" rx="19" ry="7.4" transform="rotate(35 32 32)"/>
+  </g>
+  <circle cx="32" cy="32" r="7.4" fill="#61DAFB" stroke="#2D2A32" stroke-width="3.6"/>
+  <circle cx="48.5" cy="39.5" r="3.2" fill="#FF9F45"/>
+</svg>

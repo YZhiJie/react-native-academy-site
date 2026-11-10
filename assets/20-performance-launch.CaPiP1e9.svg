@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700" role="img" aria-label="活动上线闭环：首屏预算、设备降级、三层开关与灰度、监控告警与复盘漏斗">
+  <defs>
+    <marker id="a20" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2D2A32"/>
+    </marker>
+    <style>
+      .t { font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; fill: #2D2A32; }
+      .s { font-size: 14px; fill: #5B5663; }
+      .b { font-size: 18px; font-weight: 700; }
+      .mono { font-family: 'SFMono-Regular',Menlo,Consolas,monospace; font-size: 12px; fill: #5B5663; }
+      .arrow { stroke: #2D2A32; stroke-width: 3; fill: none; marker-end: url(#a20); }
+    </style>
+  </defs>
+
+  <rect width="1200" height="700" fill="#F2EFE6"/>
+  <rect x="0" y="0" width="1200" height="76" fill="#2D2A32"/>
+  <text x="40" y="50" fill="#FFD93D" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="28" font-weight="700">上线闭环：首屏 → 降级 → 灰度 → 监控 → 复盘</text>
+
+  <!-- 首屏预算 -->
+  <rect x="40" y="105" width="360" height="215" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="60" y="140" class="t b">首屏预算（gzip）</text>
+  <rect x="60" y="158" width="290" height="26" rx="6" fill="#FFE9F1"/>
+  <text x="70" y="177" class="t s">vendor-react 60.5KB</text>
+  <rect x="60" y="192" width="52" height="26" rx="6" fill="#FFF6D6"/>
+  <text x="120" y="211" class="t s">业务 5.0KB</text>
+  <rect x="60" y="226" width="26" height="26" rx="6" fill="#E9F7EC"/>
+  <text x="94" y="245" class="t s">海报 2.0KB（按需）</text>
+  <text x="60" y="282" class="t s">React 占 92%：优化空间在「不加载什么」</text>
+  <text x="60" y="306" class="t s" fill="#9B5DE5">target: es2018 — 兼容老 WebView 更划算</text>
+
+  <!-- 降级 -->
+  <rect x="420" y="105" width="360" height="215" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="440" y="140" class="t b">三档降级：每档写明「不做什么」</text>
+  <text x="440" y="172" class="t s">high：转盘 spin · 粒子 · 预加载 3 张</text>
+  <text x="440" y="198" class="t s">mid ：转盘 fade · 无富动画 · 1 张</text>
+  <text x="440" y="224" class="t s">low ：无转盘动画 · 无装饰 · 0 张</text>
+  <text x="440" y="256" class="t s" fill="#C0392B">只动 transform / opacity</text>
+  <text x="440" y="280" class="t s">先砍图片，再砍动画，最后才砍主流程</text>
+  <text x="440" y="304" class="t s" fill="#9B5DE5">will-change 克制，避免低内存闪退</text>
+
+  <!-- 三层开关 -->
+  <rect x="800" y="105" width="360" height="215" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="820" y="140" class="t b">三层开关，互相独立</text>
+  <rect x="820" y="156" width="320" height="40" rx="8" fill="#FFE9F1"/>
+  <text x="832" y="181" class="t s">① drawEnabled：入口置灰，公告仍可读</text>
+  <rect x="820" y="204" width="320" height="40" rx="8" fill="#FFF6D6"/>
+  <text x="832" y="229" class="t s">② grayPercent：未命中提示「未开始」</text>
+  <rect x="820" y="252" width="320" height="40" rx="8" fill="#E9F7EC"/>
+  <text x="832" y="277" class="t s">③ budgetCents：继续抽，只出谢谢参与</text>
+  <text x="820" y="310" class="t s" fill="#C0392B">灰度只改百分比，不改哈希算法</text>
+
+  <!-- 灰度放量 -->
+  <rect x="40" y="350" width="560" height="150" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="60" y="383" class="t b">灰度放量：5% → 20% → 50% → 100%</text>
+  <rect x="60" y="400" width="60" height="50" rx="8" fill="#E8F6F8" stroke="#2D2A32" stroke-width="2"/>
+  <text x="90" y="430" text-anchor="middle" class="t s">5%</text>
+  <rect x="150" y="400" width="100" height="50" rx="8" fill="#E8F6F8" stroke="#2D2A32" stroke-width="2"/>
+  <text x="200" y="430" text-anchor="middle" class="t s">20%</text>
+  <rect x="280" y="400" width="130" height="50" rx="8" fill="#FFF6D6" stroke="#2D2A32" stroke-width="2"/>
+  <text x="345" y="430" text-anchor="middle" class="t s">50%</text>
+  <rect x="440" y="400" width="130" height="50" rx="8" fill="#E9F7EC" stroke="#2D2A32" stroke-width="2"/>
+  <text x="505" y="430" text-anchor="middle" class="t s">100%</text>
+  <text x="60" y="478" class="t s">每档观察 ≥ 30 分钟；分桶稳定，扩量不洗牌</text>
+
+  <!-- 告警 -->
+  <rect x="620" y="350" width="540" height="150" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="640" y="383" class="t b">四条告警，每条都对应动作</text>
+  <text x="640" y="412" class="t s">抽奖错误率 &gt; 1%（5 分钟） → 查依赖与库存</text>
+  <text x="640" y="438" class="t s">成功率骤降 &gt; 30% → 查配置与活动窗口</text>
+  <text x="640" y="464" class="t s">库存 &lt; 10% → 补货或降级</text>
+  <text x="640" y="490" class="t s">预算消耗 &gt; 日预算 2 倍 → 查刷量与权重</text>
+
+  <!-- 复盘 -->
+  <rect x="40" y="520" width="1120" height="150" rx="16" fill="#2D2A32"/>
+  <text x="60" y="555" fill="#FFD93D" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="18" font-weight="700">复盘四维：漏斗 · 渠道 · 成本 · 异常（口径先定：人次 ≠ 人数）</text>
+  <text x="60" y="588" fill="#F2EFE6" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="14">单次期望成本 = Σ(权重/10000 × 单价) = 189 分/次（原型的单测固定值）</text>
+  <text x="60" y="614" fill="#F2EFE6" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="14">总成本 = 抽奖次数 × 期望成本 + 流量 + 人力；有效参与成本 = 总成本 / 去重人数</text>
+  <text x="60" y="644" fill="#FFD93D" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="14">结论必须落到「下次要改的三件事」，且具体到可执行动作</text>
+</svg>

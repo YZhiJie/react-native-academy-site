@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700" role="img" aria-label="分享传播：微信 JS-SDK 卡片分享、海报布局与绘制分层、二维码回流归因与 first-touch 绑定">
+  <defs>
+    <marker id="a19" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2D2A32"/>
+    </marker>
+    <style>
+      .t { font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; fill: #2D2A32; }
+      .s { font-size: 14px; fill: #5B5663; }
+      .b { font-size: 18px; font-weight: 700; }
+      .mono { font-family: 'SFMono-Regular',Menlo,Consolas,monospace; font-size: 12px; fill: #5B5663; }
+      .arrow { stroke: #2D2A32; stroke-width: 3; fill: none; marker-end: url(#a19); }
+    </style>
+  </defs>
+
+  <rect width="1200" height="700" fill="#F2EFE6"/>
+  <rect x="0" y="0" width="1200" height="76" fill="#2D2A32"/>
+  <text x="40" y="50" fill="#FFD93D" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="28" font-weight="700">分享三段链路：卡片 → 海报 → 回流归因</text>
+
+  <!-- 段一 -->
+  <rect x="40" y="105" width="360" height="210" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="60" y="140" class="t b">① 卡片分享（微信内）</text>
+  <text x="60" y="172" class="t s">前置：认证公众号 / JS 安全域名</text>
+  <text x="60" y="196" class="t s">后端签名 / URL 去 hash 精确匹配</text>
+  <text x="60" y="228" class="mono">updateAppMessageShareData</text>
+  <text x="60" y="250" class="mono">updateTimelineShareData</text>
+  <text x="60" y="282" class="t s" fill="#C0392B">朋友圈不能 JS 触发，只能引导右上角</text>
+  <text x="60" y="302" class="t s" fill="#9B5DE5">失败一律降级，不抛错阻塞抽奖</text>
+
+  <!-- 段二 -->
+  <rect x="420" y="105" width="360" height="210" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="440" y="140" class="t b">② 海报（可跨平台）</text>
+  <text x="440" y="172" class="t s">布局纯函数：矩形 + 折行 + 溢出</text>
+  <text x="440" y="196" class="t s">绘制薄层：背景→头像→文案→二维码</text>
+  <text x="440" y="228" class="t s">DPR = CSS 像素 × 设备像素比</text>
+  <text x="440" y="252" class="t s">长边 ≤ 2000px，JPEG 0.86</text>
+  <text x="440" y="284" class="t s" fill="#C0392B">Object URL 用完必须 revoke</text>
+  <text x="440" y="304" class="t s" fill="#9B5DE5">toBlob 返回 null 要有兜底</text>
+
+  <!-- 段三 -->
+  <rect x="800" y="105" width="360" height="210" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="820" y="140" class="t b">③ 回流归因</text>
+  <text x="820" y="172" class="t s">参数放 query，不放 hash</text>
+  <text x="820" y="196" class="t s">scene 兼容「k=v 编码」与「直接邀请码」</text>
+  <text x="820" y="228" class="t s">绑定：first-touch + 归因窗口</text>
+  <text x="820" y="252" class="t s">拒绝：自绑定 / 缺参数</text>
+  <text x="820" y="284" class="t s" fill="#C0392B">绑定 ≠ 助力，别合表</text>
+  <text x="820" y="304" class="t s" fill="#9B5DE5">改绑一次不能多发一份奖励</text>
+
+  <path d="M400 210 L420 210" class="arrow"/>
+
+  <!-- 分享链接 -->
+  <rect x="40" y="345" width="520" height="90" rx="12" fill="#FFF6D6" stroke="#2D2A32" stroke-width="2.5"/>
+  <text x="60" y="376" class="t b">分享链接必须自带标记</text>
+  <text x="60" y="404" class="mono">/activity?aid=summer-2026&amp;inviter=u_42&amp;channel=qr&amp;from=share</text>
+  <text x="60" y="424" class="t s">channel 决定渠道对比，from=share 区分自然量</text>
+
+  <!-- 海报分层 -->
+  <rect x="590" y="330" width="570" height="330" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="610" y="362" class="t b">海报 750 × 1334 分层（从上到下）</text>
+
+  <rect x="620" y="380" width="200" height="250" rx="10" fill="#2A1650" stroke="#2D2A32" stroke-width="2"/>
+  <circle cx="650" cy="412" r="16" fill="#61DAFB"/>
+  <text x="676" y="417" class="t s" fill="#FFFFFF">昵称</text>
+  <text x="720" y="490" text-anchor="middle" class="t" fill="#FFD93D" font-size="16" font-weight="700">100 积分</text>
+  <rect x="690" y="560" width="60" height="60" rx="6" fill="#FFFFFF"/>
+  <text x="720" y="596" text-anchor="middle" class="mono">二维码</text>
+  <text x="720" y="645" text-anchor="middle" class="mono" fill="#FFFFFF">safe-area 48px</text>
+
+  <text x="850" y="396" class="t s">y = 0：背景图铺满，先画</text>
+  <text x="850" y="426" class="t s">y ≈ 10%：头像 + 昵称（左）</text>
+  <text x="850" y="456" class="t s">y ≈ 46%：奖品文案（居中，最多 2 行）</text>
+  <text x="850" y="486" class="t s">溢出判定：正文底 + 24 &gt; 二维码顶</text>
+  <text x="850" y="516" class="t s">溢出处理：缩字号，不截断</text>
+  <text x="850" y="552" class="t s" fill="#C0392B">二维码最后画，永不被遮挡</text>
+  <text x="850" y="582" class="t s">底部预留 footer + 安全区</text>
+  <text x="850" y="618" class="t s" fill="#2E7D32">单测断言：二维码是最后一次 drawImage</text>
+</svg>

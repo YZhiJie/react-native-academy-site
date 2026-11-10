@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700" role="img" aria-label="活动 H5 工程骨架：立项表到配置契约、页面结构、玩法状态机、埋点与降级">
+  <defs>
+    <marker id="a17" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2D2A32"/>
+    </marker>
+    <style>
+      .t { font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; fill: #2D2A32; }
+      .s { font-size: 14px; fill: #5B5663; }
+      .b { font-size: 18px; font-weight: 700; }
+      .mono { font-family: 'SFMono-Regular',Menlo,Consolas,monospace; font-size: 12px; fill: #5B5663; }
+      .arrow { stroke: #2D2A32; stroke-width: 3; fill: none; marker-end: url(#a17); }
+      .node { fill: #FFFFFF; stroke: #2D2A32; stroke-width: 2.5; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="700" fill="#F2EFE6"/>
+  <rect x="0" y="0" width="1200" height="76" fill="#2D2A32"/>
+  <text x="40" y="50" class="t" fill="#FFD93D" font-size="28" font-weight="700">活动 H5 骨架：先定契约，再画状态机</text>
+
+  <rect x="40" y="110" width="250" height="170" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="165" y="145" text-anchor="middle" class="t b">1. 立项表</text>
+  <text x="165" y="175" text-anchor="middle" class="t s">目标 / 预算 / 周期</text>
+  <text x="165" y="199" text-anchor="middle" class="t s">投放渠道 / 目标用户</text>
+  <text x="165" y="223" text-anchor="middle" class="t s">玩法与合规要求</text>
+  <text x="165" y="247" text-anchor="middle" class="t s">竞品调研与物料</text>
+  <text x="165" y="266" text-anchor="middle" class="mono">campaign.ts</text>
+
+  <rect x="330" y="110" width="260" height="170" rx="16" fill="#FFF6D6" stroke="#2D2A32" stroke-width="3"/>
+  <text x="460" y="145" text-anchor="middle" class="t b">2. 配置契约</text>
+  <text x="460" y="175" text-anchor="middle" class="t s">金额用「分」，权重用万分比</text>
+  <text x="460" y="199" text-anchor="middle" class="t s">权重和必须精确 10000</text>
+  <text x="460" y="223" text-anchor="middle" class="t s">预算与最坏库存反推校验</text>
+  <text x="460" y="247" text-anchor="middle" class="t s">合规链接缺失即阻断发布</text>
+  <text x="460" y="266" text-anchor="middle" class="mono">validateCampaign()</text>
+
+  <rect x="630" y="110" width="250" height="170" rx="16" fill="#FFE9F1" stroke="#2D2A32" stroke-width="3"/>
+  <text x="755" y="145" text-anchor="middle" class="t b">3. 玩法状态机</text>
+  <text x="755" y="175" text-anchor="middle" class="t s">booting → idle → drawing</text>
+  <text x="755" y="199" text-anchor="middle" class="t s">→ result → claiming → claimed</text>
+  <text x="755" y="223" text-anchor="middle" class="t s">ended / blocked 两个终局</text>
+  <text x="755" y="247" text-anchor="middle" class="t s">非法迁移直接返回原引用</text>
+  <text x="755" y="266" text-anchor="middle" class="mono">playMachine.ts</text>
+
+  <rect x="920" y="110" width="240" height="170" rx="16" fill="#E8F6F8" stroke="#2D2A32" stroke-width="3"/>
+  <text x="1040" y="145" text-anchor="middle" class="t b">4. 观测与降级</text>
+  <text x="1040" y="175" text-anchor="middle" class="t s">traceId 串起点击→结果</text>
+  <text x="1040" y="199" text-anchor="middle" class="t s">批量 + 重试 + 落盘补发</text>
+  <text x="1040" y="223" text-anchor="middle" class="t s">能力探测：内存 / 核心 / 网络</text>
+  <text x="1040" y="247" text-anchor="middle" class="t s">先砍图片与装饰，再砍主流程</text>
+  <text x="1040" y="266" text-anchor="middle" class="mono">tracking.ts / degrade.ts</text>
+
+  <path d="M290 195 L330 195" class="arrow"/>
+  <path d="M590 195 L630 195" class="arrow"/>
+  <path d="M880 195 L920 195" class="arrow"/>
+
+  <rect x="40" y="330" width="700" height="300" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="60" y="365" class="t b">状态迁移：只允许这些箭头</text>
+
+  <rect x="70" y="395" width="120" height="46" rx="23" class="node"/>
+  <text x="130" y="424" text-anchor="middle" class="t s">booting</text>
+  <rect x="240" y="395" width="120" height="46" rx="23" class="node"/>
+  <text x="300" y="424" text-anchor="middle" class="t s">idle</text>
+  <rect x="410" y="395" width="120" height="46" rx="23" fill="#FFF6D6" stroke="#2D2A32" stroke-width="2.5"/>
+  <text x="470" y="424" text-anchor="middle" class="t s">drawing</text>
+  <rect x="580" y="395" width="120" height="46" rx="23" class="node"/>
+  <text x="640" y="424" text-anchor="middle" class="t s">result</text>
+
+  <path d="M190 418 L240 418" class="arrow"/>
+  <path d="M360 418 L410 418" class="arrow"/>
+  <path d="M530 418 L580 418" class="arrow"/>
+
+  <rect x="410" y="500" width="120" height="46" rx="23" fill="#FFE9F1" stroke="#2D2A32" stroke-width="2.5"/>
+  <text x="470" y="529" text-anchor="middle" class="t s">claiming</text>
+  <rect x="580" y="500" width="120" height="46" rx="23" fill="#E9F7EC" stroke="#2D2A32" stroke-width="2.5"/>
+  <text x="640" y="529" text-anchor="middle" class="t s">claimed</text>
+  <path d="M470 441 L470 500" class="arrow"/>
+  <text x="480" y="478" class="t s">非谢谢参与</text>
+  <path d="M530 523 L580 523" class="arrow"/>
+
+  <path d="M640 441 C640 470 300 470 300 441" class="arrow"/>
+  <text x="470" y="470" text-anchor="middle" class="t s" fill="#9B5DE5">DISMISS 回 idle</text>
+
+  <text x="70" y="590" class="t s">重复点击在 drawing 阶段丢弃；网络失败回 idle 但保留 requestId；</text>
+  <text x="70" y="614" class="t s">换 requestId 重试会被 reducer 拦下——这是服务端幂等成立的前提。</text>
+
+  <rect x="770" y="330" width="390" height="300" rx="16" fill="#FFFFFF" stroke="#2D2A32" stroke-width="3"/>
+  <text x="790" y="365" class="t b">埋点：一条 traceId 串到底</text>
+  <text x="790" y="400" class="t s">page_view → draw_click → draw_result</text>
+  <text x="790" y="424" class="t s">→ claim_click，同一个 traceId = requestId</text>
+  <text x="790" y="460" class="t s">批量：10 条或 3 秒，谁先到谁触发</text>
+  <text x="790" y="484" class="t s">重试：指数退避，最多 3 次</text>
+  <text x="790" y="508" class="t s">兜底：visibilitychange 落 localStorage</text>
+  <text x="790" y="544" class="t s" fill="#C0392B">口径先写清楚：按 traceId 是「人次」，</text>
+  <text x="790" y="568" class="t s" fill="#C0392B">按 userId 才是「人数」，复盘要报人数。</text>
+  <text x="790" y="604" class="t s">灰度：FNV-1a(campaignId:userId) % 100</text>
+</svg>

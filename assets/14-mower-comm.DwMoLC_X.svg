@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="割草机器人通信链路：App、MQTT broker 与模拟车端">
+  <defs>
+    <marker id="arrow14" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2D2A32"/>
+    </marker>
+    <marker id="arrowBlue14" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1F7A8C"/>
+    </marker>
+    <style>
+      .ink { fill: #2D2A32; }
+      .panel { fill: #FFFFFF; stroke: #2D2A32; stroke-width: 3; rx: 18; }
+      .sub { fill: #F7F5EF; stroke: #2D2A32; stroke-width: 2; rx: 12; }
+      .t { font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; fill: #2D2A32; }
+      .title { font-size: 30px; font-weight: 700; }
+      .h { font-size: 22px; font-weight: 700; }
+      .b { font-size: 16px; }
+      .s { font-size: 14px; fill: #5B5663; }
+      .mono { font-family: 'SFMono-Regular',Menlo,Consolas,monospace; font-size: 14px; }
+      .arrow { stroke: #2D2A32; stroke-width: 3; fill: none; marker-end: url(#arrow14); }
+      .arrowBlue { stroke: #1F7A8C; stroke-width: 3; fill: none; marker-end: url(#arrowBlue14); }
+    </style>
+  </defs>
+
+  <rect width="1200" height="800" fill="#F2EFE6"/>
+  <rect x="0" y="0" width="1200" height="86" fill="#2D2A32"/>
+  <text x="40" y="56" class="t" fill="#FFD93D" font-size="30" font-weight="700">第 14 章 · 一条指令要经过多少层？</text>
+  <text x="1160" y="56" text-anchor="end" class="t" fill="#C8B6FF" font-size="18">mower-console-demo</text>
+
+  <!-- App -->
+  <rect x="40" y="120" width="330" height="560" class="panel"/>
+  <text x="205" y="160" text-anchor="middle" class="t h">RN App</text>
+  <rect x="70" y="185" width="270" height="90" class="sub"/>
+  <text x="205" y="215" text-anchor="middle" class="t b" font-weight="700">UI 层</text>
+  <text x="205" y="242" text-anchor="middle" class="t s">连接页 / 地图页 / 任务页 / 诊断页</text>
+  <text x="205" y="264" text-anchor="middle" class="t s">只读快照，不直接碰 socket</text>
+
+  <rect x="70" y="295" width="270" height="150" class="sub" fill="#FFF6D6"/>
+  <text x="205" y="325" text-anchor="middle" class="t b" font-weight="700">MqttService（编排）</text>
+  <text x="205" y="352" text-anchor="middle" class="t s">ConnectionMachine 状态机</text>
+  <text x="205" y="376" text-anchor="middle" class="t s">Outbox 幂等队列 + 退避</text>
+  <text x="205" y="400" text-anchor="middle" class="t s">心跳看门狗 / 遥测降级</text>
+  <text x="205" y="424" text-anchor="middle" class="t mono s">mqttService.ts</text>
+
+  <rect x="70" y="465" width="270" height="150" class="sub" fill="#E8F6F8"/>
+  <text x="205" y="495" text-anchor="middle" class="t b" font-weight="700">MqttClient（一次连接）</text>
+  <text x="205" y="522" text-anchor="middle" class="t s">MQTT 3.1.1 编解码</text>
+  <text x="205" y="546" text-anchor="middle" class="t s">CONNECT / SUBSCRIBE / PUBACK</text>
+  <text x="205" y="570" text-anchor="middle" class="t s">PINGREQ / PINGRESP</text>
+  <text x="205" y="594" text-anchor="middle" class="t mono s">core/mqtt/client.ts</text>
+
+  <rect x="70" y="635" width="270" height="30" class="sub" fill="#F2EFE6"/>
+  <text x="205" y="656" text-anchor="middle" class="t mono s">FrameStreamDecoder（二进制帧）</text>
+
+  <!-- Broker -->
+  <rect x="425" y="180" width="350" height="300" class="panel"/>
+  <text x="600" y="222" text-anchor="middle" class="t h">本地 Broker（aedes）</text>
+  <rect x="455" y="245" width="290" height="70" class="sub" fill="#E6F7EA"/>
+  <text x="600" y="275" text-anchor="middle" class="t b">TCP 1883</text>
+  <text x="600" y="300" text-anchor="middle" class="t s">给 mosquitto_pub / CLI 备用</text>
+  <rect x="455" y="330" width="290" height="70" class="sub" fill="#E6F7EA"/>
+  <text x="600" y="360" text-anchor="middle" class="t b">WebSocket 8888</text>
+  <text x="600" y="385" text-anchor="middle" class="t s">RN 端唯一可移植入口</text>
+  <text x="600" y="445" text-anchor="middle" class="t s">QoS1 存储转发 · 遗嘱代发 · keepalive</text>
+
+  <!-- Mower -->
+  <rect x="830" y="120" width="330" height="560" class="panel"/>
+  <text x="995" y="160" text-anchor="middle" class="t h">模拟割草机</text>
+  <rect x="860" y="185" width="270" height="110" class="sub" fill="#FFE9F1"/>
+  <text x="995" y="215" text-anchor="middle" class="t b" font-weight="700">遥测 2Hz</text>
+  <text x="995" y="242" text-anchor="middle" class="t s">位姿 / 电量 / 作业状态</text>
+  <text x="995" y="266" text-anchor="middle" class="t mono s">mower/mower-01/telemetry</text>
+  <text x="995" y="286" text-anchor="middle" class="t s">JSON + QoS1</text>
+
+  <rect x="860" y="315" width="270" height="100" class="sub" fill="#EFE8FF"/>
+  <text x="995" y="345" text-anchor="middle" class="t b" font-weight="700">NMEA 1Hz（模拟 RTK）</text>
+  <text x="995" y="372" text-anchor="middle" class="t s">GGA / RMC 文本</text>
+  <text x="995" y="396" text-anchor="middle" class="t mono s">mower/mower-01/nmea</text>
+
+  <rect x="860" y="435" width="270" height="110" class="sub" fill="#FFF6D6"/>
+  <text x="995" y="465" text-anchor="middle" class="t b" font-weight="700">指令 / 帧处理</text>
+  <text x="995" y="492" text-anchor="middle" class="t s">按幂等键去重后执行</text>
+  <text x="995" y="516" text-anchor="middle" class="t s">回 cmd/ack 与 ACK 帧</text>
+  <text x="995" y="538" text-anchor="middle" class="t mono s">cmd · frame/down · frame/up</text>
+
+  <rect x="860" y="565" width="270" height="90" class="sub" fill="#FFE3E3"/>
+  <text x="995" y="595" text-anchor="middle" class="t b" font-weight="700">遗嘱 LWT</text>
+  <text x="995" y="622" text-anchor="middle" class="t s">异常断线由 broker 代发</text>
+  <text x="995" y="644" text-anchor="middle" class="t mono s">mower/mower-01/lwt</text>
+
+  <!-- Arrows app-broker -->
+  <path d="M340 540 C380 540 385 470 425 470" class="arrow"/>
+  <text x="346" y="505" class="t s">WS</text>
+  <path d="M425 390 C380 390 385 330 340 330" class="arrowBlue"/>
+  <text x="348" y="368" class="t s">下行</text>
+
+  <!-- Arrows broker-mower -->
+  <path d="M775 280 C800 280 805 240 830 240" class="arrow"/>
+  <text x="790" y="255" class="t s">pub</text>
+  <path d="M830 480 C805 480 800 440 775 440" class="arrowBlue"/>
+  <text x="784" y="468" class="t s">sub</text>
+
+  <!-- bottom note -->
+  <rect x="40" y="705" width="1120" height="60" class="sub" fill="#2D2A32"/>
+  <text x="60" y="742" class="t" fill="#FFD93D" font-size="17">关键分层：传输（WebSocket）→ 协议（MQTT）→ 业务帧（MW + CRC16）→ 编排（状态机 + outbox）。任何一层都不替另一层做决定。</text>
+</svg>
